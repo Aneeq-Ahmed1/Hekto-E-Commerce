@@ -193,3 +193,53 @@ export default function CartPage() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+// // pages/cart.tsx
+
+// // import { useCart } from '../context/CartContext';
+// // import { useCart } from "../Context/CartContext"
+// import { useCart } from "../context/CartContext"
+
+// import Link from 'next/link';
+
+// const CartPage = () => {
+//   const { cart } = useCart();
+
+//   if (cart.length === 0) {
+//     return (
+//       <div>
+//         <h1>Your cart is empty</h1>
+//         <Link href="/">Go back to products</Link>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div>
+//       <h1>Your Cart</h1>
+//       {cart.map((item) => (
+//         <div key={item.id}>
+//           <h2>{item.name}</h2>
+//           <p>Quantity: {item.quantity}</p>
+//           <p>Price: ${item.price * item.quantity}</p>
+//         </div>
+//       ))}
+//       <button>Proceed to Checkout</button>
+//     </div>
+//   );
+// };
+
+// export default CartPage;
+
+
+
+

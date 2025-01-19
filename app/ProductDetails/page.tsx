@@ -175,9 +175,77 @@
 
 
 
-import { sanityFetch } from "../../sanity/lib/fetch";
+// import { sanityFetch } from "../../sanity/lib/fetch";
 
-// import { allproducts } from "@/sanity/lib/queries";
+// // import { allproducts } from "@/sanity/lib/queries";
+// import Image from "next/image";
+
+// type Product = {
+//   _id: string;
+//   name: string;
+//   description: string;
+//   price: number;
+//   imageUrl: string;
+// };
+
+// export default async function Home() {
+//   // Fetch products, make sure the query limits to 20 products
+//   const query = `*[_type == "product"][0...40] { 
+//     _id,
+//     name,
+//     description,
+//     price,
+//     "imageUrl": image.asset->url
+//   }`;
+
+//   // Fetching products from Sanity
+//   const products: Product[] = await sanityFetch({ query });
+
+//   return (
+//     <div className="p-8">
+//       <h1 className="text-3xl font-semibold text-center mb-8">Products</h1>
+//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+//         {products.map((product) => (
+//           <div
+//             className="border rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out p-4 flex flex-col items-center bg-white"
+//             key={product._id}
+//           >
+//             <div className="relative flex flex-col justify-center items-center w-full h-60 mb-4">
+//               <Image
+//                 src={product.imageUrl || "/default-image.jpg"} // Fallback for missing images
+//                 alt={product.name}
+//                 className="object-cover rounded-lg"
+//                 width={250}
+//                 height={300}
+                
+//               />
+//             </div>
+//             <h2 className="text-xl font-bold text-center text-gray-800 mb-2">
+//               {product.name}
+//             </h2>
+//             <p className="text-center text-gray-600 mb-4">{product.description}</p>
+//             <p className="text-lg font-semibold text-center text-gray-900">
+//               ${Number(product.price).toFixed(2)} {/* Ensure price is a number */}
+//             </p>
+//             <button className="mt-4 px-6 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors duration-300">
+//               Add to Cart
+//             </button>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+
+import { sanityFetch } from "../../sanity/lib/fetch";
+import { allproducts } from "../../sanity/lib/queries";  // Fetch all products query
+import Link from "next/link";
 import Image from "next/image";
 
 type Product = {
@@ -188,51 +256,49 @@ type Product = {
   imageUrl: string;
 };
 
-export default async function Home() {
-  // Fetch products, make sure the query limits to 20 products
-  const query = `*[_type == "product"][0...40] { 
-    _id,
-    name,
-    description,
-    price,
-    "imageUrl": image.asset->url
-  }`;
-
-  // Fetching products from Sanity
-  const products: Product[] = await sanityFetch({ query });
+const ProductListPage = async () => {
+  const products = await sanityFetch({ query: allproducts });
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-semibold text-center mb-8">Products</h1>
+      <h1 className="text-3xl font-semibold text-center mb-8">Product List</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {products.map((product) => (
+        {products.map((product: Product) => (
           <div
             className="border rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out p-4 flex flex-col items-center bg-white"
             key={product._id}
           >
             <div className="relative flex flex-col justify-center items-center w-full h-60 mb-4">
               <Image
-                src={product.imageUrl || "/default-image.jpg"} // Fallback for missing images
+                src={product.imageUrl || "/default-image.jpg"}
                 alt={product.name}
                 className="object-cover rounded-lg"
                 width={250}
                 height={300}
-                
               />
             </div>
-            <h2 className="text-xl font-bold text-center text-gray-800 mb-2">
-              {product.name}
-            </h2>
+            <h2 className="text-xl font-bold text-center text-gray-800 mb-2">{product.name}</h2>
             <p className="text-center text-gray-600 mb-4">{product.description}</p>
-            <p className="text-lg font-semibold text-center text-gray-900">
-              ${Number(product.price).toFixed(2)} {/* Ensure price is a number */}
-            </p>
-            <button className="mt-4 px-6 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors duration-300">
-              Add to Cart
-            </button>
+            <p className="text-lg font-semibold text-center text-gray-900">${product.price}</p>
+            <Link
+              href={`/ProductDetails/${product._id}`} // Link to single product page
+              className="mt-4 px-6 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors duration-300"
+            >
+              View Details
+            </Link>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default ProductListPage;
+
+
+
+
+
+
+
+
