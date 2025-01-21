@@ -242,7 +242,6 @@
 
 
 
-
 import { sanityFetch } from "../../sanity/lib/fetch";
 import { allproducts } from "../../sanity/lib/queries";  // Fetch all products query
 import Link from "next/link";

@@ -4,6 +4,7 @@ import "./globals.css";
 import Headingbar from "./components/Headingbar";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import { CartProvider } from "./context/CartContext";
 // import { CartProvider } from "./Context/CartContext";  // Import CartProvider
 // import { CartProvider } from "./context/CartContext"
 
@@ -31,12 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} >
-      {/* <CartProvider>  */}
+      <CartProvider> 
       <Headingbar/>
       <Nav/>
         {children}
         <Footer/>
-        {/* </CartProvider> */}
+        </CartProvider>
       </body>
     </html>
   );
