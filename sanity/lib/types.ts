@@ -16,6 +16,10 @@
 
 
 export type Product = {
+    quantity: number;
+    productName: string;
+    image(image: any): unknown;
+    inventory: number;
     _id: string;
     name: string;
     description: string;

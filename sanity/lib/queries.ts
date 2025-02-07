@@ -73,3 +73,25 @@ export const singleProduct = defineQuery(`
     "imageUrl": image.asset->url
   }
 `);
+
+
+
+
+
+
+
+export const allOrders = defineQuery(`
+  *[_type == "order"] {
+    _id,
+    firstName,
+    lastName,
+    email,
+    status as orderStatus,
+    total as totalAmount,
+    orderDate,
+    cartItems[]->{
+      name,
+      price,
+    }
+  }
+`);

@@ -112,8 +112,13 @@ const Headingbar = () => {
               Wishlist
             </div>
             {/* Cart */}
-            <a href="/Cart" className="cursor-pointer hover:text-gray-200">
+            {/* <a href="/Cart" className="cursor-pointer hover:text-gray-200">
               <ShoppingCartIcon className="h-5 sm:h-7 w-5 sm:w-7 text-[#f1f1f1]" />
+              Cart
+            </a> */}
+            <a href="/Cart" className="text-[#f1f1f1] text-xs sm:text-sm font-semibold font-['Josefin Sans'] cursor-pointer flex items-center">
+              <ShoppingCartIcon className="h-5 sm:h-7 w-5 sm:w-7 text-[#f1f1f1]" />
+              Cart
             </a>
           </div>
         </div>
